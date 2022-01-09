@@ -28,13 +28,26 @@
         <li class="nav-item">
           <%= link_to "Create Post", new_post_path %>
         </li>
+        <% if !current_user %>
+           
+          <li class="nav-item">
+            <%= link_to "Log in", login_path %>
+          </li>
         
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Log out", logout_path, method: "delete" %>
+          </li>
+      <% end %>
       </ul>
 
     </div>
   </div>
 </nav>
 <div class="container">
+  <% if current_user %>
+    Hi <%= current_user.email %>
+  <% end %>
     <%= yield %>
 </div>
   </body>
