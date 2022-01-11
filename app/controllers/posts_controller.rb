@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     # http_basic_authenticate_with name: "admin", password: "1234", except: [:index, :show]
-    
+    load_and_authorize_resource
     def index
         @posts = Post.all
     end
