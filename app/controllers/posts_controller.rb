@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
     # http_basic_authenticate_with name: "admin", password: "1234", except: [:index, :show]
     load_and_authorize_resource
+    before_action :set_user_id
     def index
         @posts = Post.all
+        
     end
 
     def show
@@ -21,7 +23,10 @@ class PostsController < ApplicationController
         @post = Post.new(post_params)
 
         if(@post.save)
-            redirect_to @post
+            # Create the notifications
+            Notification.create(recipient: User.find(1), actor:User.find(session[:user_id]), action: "posted", notifiable: @post)
+            redirect_to @post            
+            
         else 
             render 'new'
         
@@ -52,8 +57,14 @@ class PostsController < ApplicationController
     end
 
 
-    private def post_params
+    private 
+    
+    def post_params
         params.require(:post).permit(:title, :body)
+    end
+
+    def set_user_id
+        @user_id = User.find_by_id(1)
     end
 
 

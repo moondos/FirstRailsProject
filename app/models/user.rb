@@ -4,5 +4,7 @@ class User < ApplicationRecord
     validates :password, length: {minimum: 5, allow_nil:true} 
 
     has_secure_password
+
+    has_many :notifications, foreign_key: :recipient_id
 end
  
