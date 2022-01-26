@@ -3,8 +3,9 @@
   <head>
     <title>FirstRailsProject</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    
     
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -39,15 +40,18 @@
             <%= link_to "Log out", logout_path, method: "delete" %>
           </li>
 
-          <li class="nav-item btn-group">
-            <a class="dropdown-toggle nav-link" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= fa_icon "bell" %> 
+          <li class="nav-item btn-group" data-behavior="notifications">
+            
+            <a class="dropdown-toggle nav-link" type="button" data-behavior="notifications-link" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+              <%= fa_icon "bell" %> <span data-behavior = "unread-count"></span>
             </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1" data-behavior="notification-items">
+              <!--
               <a class="dropdown-item" href="#">Action</a>
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" href="#">Something else here</a>
-              
+              -->
+            
             </div>
           </li>
 
